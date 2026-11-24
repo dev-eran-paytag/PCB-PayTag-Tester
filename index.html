@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mini-A Tester — Download</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #fff; --text: #16181d; --muted: #5d6470; --line: #e3e6eb;
+    --accent: #1f6feb; --accent-text: #fff; --ok: #1a7f37; --warn-bg: #fff8e6; --warn-line: #f0d48a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1115; --card: #171a21; --text: #e8eaee; --muted: #9aa2ae; --line: #2a2f39;
+      --accent: #4c8dff; --accent-text: #0b0d12; --ok: #3fb950; --warn-bg: #2a2412; --warn-line: #5c4a1a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 720px; margin: 0 auto; padding: 48px 20px 64px; }
+  header p { color: var(--muted); margin: 4px 0 0; }
+  h1 { font-size: 28px; margin: 0; letter-spacing: -0.01em; }
+  h2 { font-size: 17px; margin: 0 0 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin-top: 24px; }
+  .latest { display: flex; gap: 20px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+  .ver { font-size: 22px; font-weight: 650; }
+  .meta { color: var(--muted); font-size: 14px; }
+  .badge { display: inline-block; font-size: 12px; font-weight: 600; color: var(--ok);
+           border: 1px solid currentColor; border-radius: 999px; padding: 1px 8px; margin-left: 8px; vertical-align: 3px; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--accent); color: var(--accent-text);
+         text-decoration: none; font-weight: 600; padding: 12px 22px; border-radius: 8px; }
+  .btn:hover { filter: brightness(1.08); }
+  .btn[aria-disabled="true"] { opacity: .5; pointer-events: none; }
+  ol { margin: 0; padding-left: 22px; }
+  ol li { margin: 6px 0; }
+  .note { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 8px; padding: 12px 14px; font-size: 14px; margin-top: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  td { padding: 8px 0; border-top: 1px solid var(--line); }
+  td:last-child { text-align: right; }
+  a { color: var(--accent); }
+  footer { color: var(--muted); font-size: 13px; margin-top: 32px; text-align: center; }
+  .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; flex: none; }
+  .lang button { background: var(--card); color: var(--muted); border: 0; padding: 6px 12px; font: inherit; font-size: 14px; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); font-weight: 600; }
+  code { font-family: ui-monospace, Consolas, monospace; font-size: .92em; }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <div>
+      <h1 data-i="title">mini-A Tester</h1>
+      <p data-i="sub">Windows test console for the mini-A PCB. Firmware is bundled inside the app.</p>
+    </div>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en">EN</button><button type="button" data-lang="zh" lang="zh-Hans">中文</button>
+    </div>
+  </header>
+
+  <section class="card latest" aria-live="polite">
+    <div>
+      <div class="ver" id="ver">Loading…</div>
+      <div class="meta" id="meta">&nbsp;</div>
+    </div>
+    <a class="btn" id="dl" href="https://github.com/dev-eran-paytag/PCB-PayTag-Tester/releases/latest" aria-disabled="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M6 10l6 6 6-6M4 21h16"/></svg>
+      <span data-i="dl">Download .exe</span>
+    </a>
+  </section>
+
+  <section class="card">
+    <h2 data-i="how">How to run</h2>
+    <ol>
+      <li data-i="s1">Download the <code>.exe</code> above (Windows 10/11).</li>
+      <li data-i="s2">Connect the tester to the PC by USB.</li>
+      <li data-i="s3">Double-click the <code>.exe</code>. No install is needed.</li>
+      <li data-i="s4">The version is shown in the app and written into every report. Always use the latest version from this page.</li>
+    </ol>
+    <div class="note" data-i="warn">
+      <strong>Windows warning?</strong> If Windows SmartScreen says "Windows protected your PC",
+      click <em>More info</em> → <em>Run anyway</em>. The app is not code-signed yet.
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 data-i="prev">Previous versions</h2>
+    <table><tbody id="older"><tr><td class="meta">Loading…</td></tr></tbody></table>
+  </section>
+
+  <footer>
+    <span data-i="help">Problems? Contact the mini-A team.</span> ·
+    <a href="https://github.com/dev-eran-paytag/PCB-PayTag-Tester/releases" data-i="all">All releases</a>
+  </footer>
+</main>
+
+<script>
+const T = {
+  en: {
+    title: "mini-A Tester",
+    sub: "Windows test console for the mini-A PCB. Firmware is bundled inside the app.",
+    dl: "Download .exe", how: "How to run", prev: "Previous versions", latest: "Latest",
+    s1: 'Download the <code>.exe</code> above (Windows 10/11).',
+    s2: "Connect the tester to the PC by USB.",
+    s3: 'Double-click the <code>.exe</code>. No install is needed.',
+    s4: "The version is shown in the app and written into every report. Always use the latest version from this page.",
+    warn: '<strong>Windows warning?</strong> If Windows SmartScreen says "Windows protected your PC", click <em>More info</em> → <em>Run anyway</em>. The app is not code-signed yet.',
+    help: "Problems? Contact the mini-A team.", all: "All releases",
+    loading: "Loading…", none: "No release yet", noneMeta: "The first stable version will appear here automatically.",
+    noneOld: "None yet.", download: "Download",
+    fbVer: "Latest version", fbMeta: "Opens the GitHub release page.", fbAll: "See all releases on GitHub",
+  },
+  zh: {
+    title: "mini-A 测试工具",
+    sub: "mini-A 电路板的 Windows 测试程序。固件已内置在程序中。",
+    dl: "下载 .exe", how: "使用方法", prev: "历史版本", latest: "最新",
+    s1: "下载上方的 <code>.exe</code> 文件（Windows 10/11）。",
+    s2: "用 USB 将测试器连接到电脑。",
+    s3: "双击 <code>.exe</code> 运行，无需安装。",
+    s4: "版本号显示在程序中，并写入每份测试报告。请始终使用本页面上的最新版本。",
+    warn: "<strong>出现 Windows 警告？</strong>如果 Windows SmartScreen 提示“Windows 已保护你的电脑”，请点击<em>更多信息</em> → <em>仍要运行</em>。本程序暂未进行代码签名。",
+    help: "遇到问题？请联系 mini-A 团队。", all: "全部版本",
+    loading: "加载中…", none: "暂无版本", noneMeta: "第一个正式版本发布后会自动显示在这里。",
+    noneOld: "暂无。", download: "下载",
+    fbVer: "最新版本", fbMeta: "将打开 GitHub 发布页面。", fbAll: "在 GitHub 上查看全部版本",
+  },
+};
+const repo = "dev-eran-paytag/PCB-PayTag-Tester";
+const $ = id => document.getElementById(id);
+const exeOf = r => (r.assets || []).find(a => a.name.toLowerCase().endsWith(".exe"));
+let lang = localStorage.getItem("lang") || (navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
+let state = { kind: "loading" };
+
+function fmt(d) {
+  return new Date(d).toLocaleDateString(lang === "zh" ? "zh-CN" : "en-US", { year: "numeric", month: "short", day: "numeric" });
+}
+
+function render() {
+  const t = T[lang];
+  document.documentElement.lang = lang === "zh" ? "zh-Hans" : "en";
+  document.title = t.title + (lang === "zh" ? " — 下载" : " — Download");
+  document.querySelectorAll("[data-i]").forEach(el => { el.innerHTML = t[el.dataset.i]; });
+  document.querySelectorAll("[data-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+  const dl = $("dl");
+  if (state.kind === "loading") {
+    $("ver").textContent = t.loading; $("meta").innerHTML = "&nbsp;";
+    $("older").innerHTML = `<tr><td class="meta">${t.loading}</td></tr>`;
+  } else if (state.kind === "none") {
+    $("ver").textContent = t.none; $("meta").textContent = t.noneMeta;
+    $("older").innerHTML = `<tr><td class="meta">${t.noneOld}</td></tr>`;
+  } else if (state.kind === "error") {
+    $("ver").textContent = t.fbVer; $("meta").textContent = t.fbMeta;
+    dl.removeAttribute("aria-disabled");
+    $("older").innerHTML = `<tr><td><a href="https://github.com/${repo}/releases">${t.fbAll}</a></td></tr>`;
+  } else {
+    const [latest, ...older] = state.releases, exe = exeOf(latest);
+    $("ver").innerHTML = `${latest.tag_name}<span class="badge">${t.latest}</span>`;
+    $("meta").textContent = `${fmt(latest.published_at)} · ${(exe.size / 1048576).toFixed(1)} MB · ${exe.name}`;
+    dl.href = exe.browser_download_url; dl.removeAttribute("aria-disabled");
+    $("older").innerHTML = older.length
+      ? older.map(r => `<tr><td>${r.tag_name} <span class="meta">· ${fmt(r.published_at)}</span></td>
+          <td><a href="${exeOf(r).browser_download_url}">${t.download}</a></td></tr>`).join("")
+      : `<tr><td class="meta">${t.noneOld}</td></tr>`;
+  }
+}
+
+document.querySelectorAll("[data-lang]").forEach(b => b.addEventListener("click", () => {
+  lang = b.dataset.lang; localStorage.setItem("lang", lang); render();
+}));
+render();
+
+(async () => {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=30`);
+    if (!res.ok) throw new Error(res.status);
+    const stable = (await res.json()).filter(r => !r.draft && !r.prerelease && exeOf(r));
+    state = stable.length ? { kind: "ok", releases: stable } : { kind: "none" };
+  } catch (e) {
+    state = { kind: "error" };   // API unreachable or rate-limited: link to GitHub instead
+  }
+  render();
+})();
+</script>
+</body>
+</html>
